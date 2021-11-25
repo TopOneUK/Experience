@@ -1,0 +1,39 @@
+#vision{
+    > p{
+        max-width: $ys-width;
+        margin:auto;
+    }
+    .container ul{
+        display: flex;
+        max-width: $xy-width;
+        margin: auto;
+        padding: 4rem 0;
+        li{
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .vision-title{
+            text-transform: lowercase;
+            &::first-letter{
+                text-transform: capitalize;
+            }
+        }
+        .icon{
+            width: 50%;
+            margin: auto;
+        }
+        .nr{
+            font-size: $xxxx-large;
+            color: var(--blue);
+        }
+    }
+    @media (max-width: 992px) { 
+        .container ul{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

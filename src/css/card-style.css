@@ -1,0 +1,26 @@
+.card-img-top{
+    transform: scale(1);
+}
+
+.overflow{
+    overflow: hidden;
+}
+
+.card-img-top:hover{
+    transform: scale(1.05);
+    transition: transform 0.4s ease;
+}
+
+.card{
+    border: none !important;
+   
+}
+
+.card:hover{
+    box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253) !important;
+    border: none !important;
+}
+
+.cardNoShadow{
+    box-shadow: none !important;
+}

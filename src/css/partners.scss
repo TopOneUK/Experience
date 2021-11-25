@@ -1,0 +1,16 @@
+#partners {
+    overflow: hidden;
+    position: relative;
+    ul{
+        display: flex;
+        max-width: $xy-width;
+        margin: auto;
+        li{
+            position: absolute;
+            left: -10%;
+            transform: scale(0.5);
+            transition: transform .5s ease;
+            animation: slide 30s infinite linear;
+        }
+    }
+}

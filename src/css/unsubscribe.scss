@@ -1,0 +1,29 @@
+#unsubscribe{
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    z-index: 800;
+    background: var(--white);
+    padding: 2rem 1rem;
+    border: 1px solid var(--black);
+    border-radius: 1rem;
+    width: 90%;
+    h2{
+        margin-bottom: 1rem;
+        color: var(--blue);
+        font-size: $xx-large;
+    }
+    .section{
+        margin: 1rem 0;
+        label{
+            font-size: $regular;
+        }
+    }
+    .button-container {
+        margin-top: 1rem;
+    }
+    @media (min-width: 992px) { 
+        width: auto;
+    }
+}
