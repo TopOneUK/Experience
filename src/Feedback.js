@@ -11,7 +11,12 @@ export default function Feedback(){
     const [rand, setRand] = useState(Math.floor(Math.random() * Date.now()));
     // eslint-disable-next-line
     const [recaptcha, setRecaptcha] = useState(false);
-  
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [btnTxt, setBtnTxt] = useState("Submit");
     
     // eslint-disable-next-line
     useEffect(() => {
@@ -39,11 +44,16 @@ export default function Feedback(){
       sendData(Data);
     }
     function submitComment(){
+      setBtnTxt("Loading...");
+      setLoading(true);
       const emailData = {
-        message:rating + ": " +  document.getElementById("comment").value
+        message:rating + ": " +  message
       }
       const Data = {
-        comment: document.getElementById("comment").value,
+        comment: message,
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
         ID: rand
       }
       function updatecomment(data) {
@@ -61,14 +71,18 @@ export default function Feedback(){
                 "user_fGb9o9YWqNo495PufbN5T"
               ).then((result) => {
                 console.log(result.text);
+                setLoading(false);
+                setBtnTxt("Submit");
                 Swal.fire({
                   icon: "success",
-                  title: "Complete",
+                  title: "Completed",
                   text: "Comment has been submitted",
                 });
               },    
               (error) => {
                 console.log(error.text);
+                setLoading(false);
+                setBtnTxt("Submit");
                 Swal.fire({
                   icon: "error",
                   title: "ReCaptha Error",
@@ -82,11 +96,13 @@ export default function Feedback(){
           });
       }
       updatecomment(Data);
+      
     }
 
 
     return(
-        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+      <div>
+        {/* <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
             <h1 style={{marginTop:"10%"}}>You selected {rating}!</h1>
             <h3 style={{marginTop:"2%"}}>Please leave a comment here.</h3>
             <textarea
@@ -106,6 +122,73 @@ export default function Feedback(){
                 theme={"dark"}
               />
             </div>
-        </div>
+        </div> */}
+        <section
+          id="contact"
+        >
+          <h2 className="section-title">You selected {rating}!</h2>
+          <div className="inner-container">
+            <form>
+              <div className="row">
+                <label>First Name: *</label>
+                <input
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  name="firstName"
+                  type="text"
+                  placeholder="First Name"
+                  style={{ marginRight: "10px" }}
+                />
+              </div>
+
+              <div className="row">
+                <label>Last Name: *</label>
+                <input
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  name="lastname"
+                  type="text"
+                  placeholder="Last Name"
+                />
+              
+              </div>
+
+              <div className="row text">
+              <label>Email address: *</label>
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  type="text"
+                  placeholder="Enter email address"
+                />
+              </div>
+
+              <div className="row text">
+                <label>Comment:</label>
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  name="message"
+                ></textarea>
+              </div>
+
+        
+
+              <div className="row-end" style={{ margin: "auto" }}>
+                <ReCAPTCHA
+                  sitekey="6LeeR0saAAAAAFtBWLiMVz7DdSs6kChjUtU8E-ll"
+                  onChange={() => setRecaptcha(true)}
+                  theme={"dark"}
+                />
+              </div>
+              <div className={`submit ${loading ? "loading" : ""}`}>
+                {/* <input type="submit" value={btnTxt} /> */}
+                <button type="button" className="comment-button" onClick={submitComment}>{btnTxt}</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
     )
 }
